@@ -34,4 +34,15 @@ const updateEmployee = (req, res) => {
         res.send('Data updated successfully');
     });
 }
-module.exports = { saveEmployee, getEmployees, updateEmployee };
+
+const deleteEmployee = (req, res) => {
+    const { id } = req.body;
+    connection.query('DELETE FROM users WHERE id = ?', [id], (err, results) => {
+        if (err) {
+            console.error('Error deleting data:', err);
+            return res.status(500).send('Error deleting data');
+        }
+        res.send('Data deleted successfully');
+    });
+}
+module.exports = { saveEmployee, getEmployees, updateEmployee, deleteEmployee };
